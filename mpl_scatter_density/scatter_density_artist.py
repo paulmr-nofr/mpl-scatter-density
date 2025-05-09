@@ -51,18 +51,21 @@ class ScatterDensityArtist(GenericDensityArtist):
         Any additional keyword arguments are passed to AxesImage.
     """
 
-    def __init__(self, ax, x, y, downres_factor=4, c=None, **kwargs):
-        self.histogram2d_helper = FixedDataDensityHelper(ax, x, y, c=c,
-                                                         downres_factor=downres_factor)
-        super(ScatterDensityArtist, self).__init__(ax,
-                                                   histogram2d_func=self.histogram2d_helper,
-                                                   **kwargs)
+    def __init__(self, ax, x, y, downres_factor=4, c=None, linthresh=None, linscale=None, base=10, **kwargs):
+        self.histogram2d_helper = FixedDataDensityHelper(ax, x, y, c=c,  downres_factor=downres_factor, linthresh=linthresh, linscale=linscale, base=base)
+        super(ScatterDensityArtist, self).__init__(ax, histogram2d_func=self.histogram2d_helper, **kwargs)
 
     def set_xy(self, x, y):
         self.histogram2d_helper.set_xy(x, y)
 
     def set_c(self, c):
         self.histogram2d_helper.set_c(c)
+
+    def set_linthresh(self, linthresh):
+        self.histogram2d_helper.set_linthresh(linthresh)
+    
+    def set_linscale(self, linscale):
+        self.histogram2d_helper.set_linscale(linscale)
 
     def on_press(self, event=None, force=False):
         if not force:
