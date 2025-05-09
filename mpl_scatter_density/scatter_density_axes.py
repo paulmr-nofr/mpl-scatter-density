@@ -16,7 +16,7 @@ class ScatterDensityAxes(plt.Axes):
         plt.Axes.__init__(self, *args, **kwargs)
 
     def scatter_density(self, x, y, dpi=72, downres_factor=4, color=None, cmap=None,
-                        alpha=1.0, norm=None, **kwargs):
+                        alpha=1.0, norm=None, linthresh=None, linscale=None, base=10, **kwargs):
         """
         Make a density plot of the (x, y) scatter data.
 
@@ -50,7 +50,7 @@ class ScatterDensityAxes(plt.Axes):
 
         scatter = ScatterDensityArtist(self, x, y, dpi=dpi, downres_factor=downres_factor,
                                        color=color, cmap=cmap,
-                                       alpha=alpha, norm=norm, **kwargs)
+                                       alpha=alpha, norm=norm,  linthresh=linthresh, linscale=linscale, base=base, **kwargs)
         self.add_artist(scatter)
 
         return scatter
